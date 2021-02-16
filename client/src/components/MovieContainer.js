@@ -9,6 +9,23 @@ class MovieContainer extends React.Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:9000/api/v1/movies", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log("movies reponse", response);
+        return response.json();
+      })
+      .then((movieData) => {
+        console.log("movieData:", movieData);
+        this.setState({ moviesList: movieData.data });
+      });
+  }
+
   handleMovieFormSubmit = (title, genre, description) => {
     console.log("formValues:", title, genre);
     console.log("this:", this);
