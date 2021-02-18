@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MovieForm from "./ MovieForm";
 import List from "./List";
 class MovieContainer extends React.Component {
@@ -59,4 +59,21 @@ class MovieContainer extends React.Component {
   }
 }
 
-export { MovieContainer };
+const FunctionalMovieContainer = () => {
+
+  const [moviesList, setMoviesList] = useState([])
+  const [name, setName] = useState("")
+  setName("Jade")
+  setMoviesList(["Dark Knight", "Frozen", "LOTR", "The Matrix"])
+
+  return (
+    <div>
+      <h1>Movies</h1>
+      <List movies={[]}/>
+      <MovieForm submit={() => console.log("ash")}/>
+    </div>
+  );
+};
+
+
+export { MovieContainer, FunctionalMovieContainer };
