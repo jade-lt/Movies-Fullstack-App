@@ -6,12 +6,13 @@ const session        = require('express-session')
 
 require('./db/db');
 
-
+/*
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }));
+*/
 
 // SET UP CORS AS MIDDLEWARE, SO any client can make a request to our server
 app.use(bodyParser.urlencoded({extended: false}));

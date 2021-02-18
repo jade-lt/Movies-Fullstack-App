@@ -1,11 +1,31 @@
 const express = require('express');
 // Next we set up the Router
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 // require Our Model - Remember Model is
 // a representation of our data
 // The model should capitalized
 const Movie = require('../models/movie');
+
+//middleware to Verify JWT token
+//reject request if not valid
+const secretKey = '87CB9E5B-7C0B-4717-8D14-CCC3C41B6BBB'; //GUID
+router.use((req, res, next) => {
+  const token = req.get('token');
+
+  jwt.verify(token, secretKey, {algorithms: ["HS256"]}, (err, decode) => {
+    if(!err) {
+      req.user = decode; //store user info on request object
+      next(); //middleware complete, move to next endpoint
+    }
+    else {
+      res.status(401).send('please login');
+    }
+  })
+
+})
+
 // Creating the index route
 // index route should show all the fruits
  router.get('/', async (req, res, next) => {

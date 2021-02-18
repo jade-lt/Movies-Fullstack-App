@@ -2,6 +2,9 @@ const express = require('express');
 const router  = express.Router();
 const User    = require('../models/user');
 const bcrypt  = require('bcryptjs');
+const jwt     = require('jsonwebtoken');
+
+const secretKey = '87CB9E5B-7C0B-4717-8D14-CCC3C41B6BBB'; //GUID
 
 router.post('/login', async (req, res) => {
 
@@ -18,11 +21,24 @@ router.post('/login', async (req, res) => {
     // bcrypt compare returns true // or false
     if(bcrypt.compareSync(req.body.password, foundUser.password)){
        // if valid, we'll set the session
+       /*
       req.session.userId = foundUser._id;
       req.session.username = foundUser.username;
       req.session.logged = true;
+      */
+      //res.redirect('/authors')
 
-      res.redirect('/authors')
+      //sign a new JWT token
+      const payload = {
+        id: foundUser._id,
+        user: foundUser.username
+      };
+
+      jwt.sign(payload, secretKey, {expiresIn: '1h'}, (err, token) => {
+        res.set('token', token);
+        res.send();
+      })
+
 
     } else {
       // send message back to client that
@@ -66,11 +82,14 @@ router.post('/register', async (req, res) => {
       console.log(createdUser, ' created user');
 
       // set info on the session
+      /*
       req.session.userId = createdUser._id;
       req.session.username = createdUser.username;
       req.session.logged = true;
+      */
 
-      res.redirect('/authors');
+      //res.redirect('/authors');
+      res.send();
   } catch (err){
     res.send(err)
   }
