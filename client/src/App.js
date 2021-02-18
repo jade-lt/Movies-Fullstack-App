@@ -1,4 +1,5 @@
-import MovieContainer from "./components/MovieContainer";
+import { MovieContainer } from "./components/MovieContainer";
+
 const App = () => {
   return (
     <div>

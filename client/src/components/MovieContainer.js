@@ -82,4 +82,4 @@ class MovieContainer extends React.Component {
   }
 }
 
-export default MovieContainer;
+export { MovieContainer };
