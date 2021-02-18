@@ -26,29 +26,6 @@ class MovieContainer extends React.Component {
       });
   }
 
-  // Only to understand Lifescycle hooks as these methods are called at certain stages
-  // and if you need to put any your own logic in here.
-  shouldComponentUpdate() {
-    console.log("shouldComponentUpdate");
-    console.log("current state", this.state);
-    return true;
-  }
-
-  // Only to understand Lifescycle hooks as these methods are called at certain stages
-  // and if you need to put any your own logic in here.
-  componentWillUpdate() {
-    console.log("componentWillUpdate");
-    console.log("current state", this.state);
-    return true;
-  }
-
-  // Only to understand Lifescycle hooks as these methods are called at certain stages
-  // and if you need to put any your own logic in here.
-  componentDidUpdate() {
-    console.log("componentDidUpdate");
-    console.log("current state", this.state);
-  }
-
   handleMovieFormSubmit = (title, genre, description) => {
     console.log("formValues:", title, genre);
     console.log("this:", this);
