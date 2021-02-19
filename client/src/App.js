@@ -1,4 +1,7 @@
-import { MovieContainer, FunctionalMovieContainer } from "./components/MovieContainer";
+import {
+  MovieContainer,
+  FunctionalMovieContainer,
+} from "./components/MovieContainer";
 
 const App = () => {
   return (
@@ -8,5 +11,7 @@ const App = () => {
     </div>
   );
 };
+
+const TestVariable = "Ash";
 
 export { App };

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MovieForm from "./ MovieForm";
 import List from "./List";
 class MovieContainer extends React.Component {
   constructor() {
     super();
+    // initialise
     this.state = {
       moviesList: [],
     };
   }
-
   componentDidMount() {
     fetch("http://localhost:9000/api/v1/movies", {
       method: "GET",
@@ -22,13 +22,14 @@ class MovieContainer extends React.Component {
       })
       .then((movieData) => {
         console.log("movieData:", movieData);
+        // call to set state
         this.setState({ moviesList: movieData.data });
       });
   }
 
   handleMovieFormSubmit = (title, genre, description) => {
-    console.log("formValues:", title, genre);
-    console.log("this:", this);
+    console.log("using classes: formValues:", title, genre);
+    console.log("using classes: this:", this);
     // Read title and genre state and put in a temp variable which is Obj literal
     const newMovie = { genre: genre, title: title, description: description };
     // Create a new movies array variable which is a copy from movies state via ... operator
@@ -60,20 +61,42 @@ class MovieContainer extends React.Component {
 }
 
 const FunctionalMovieContainer = () => {
+  // Initialise state variables using hooks
+  const [moviesList, setMoviesList] = useState([]);
+  const [userName, setUserName] = useState("")
 
-  const [moviesList, setMoviesList] = useState([])
-  const [name, setName] = useState("")
-  setName("Jade")
-  setMoviesList(["Dark Knight", "Frozen", "LOTR", "The Matrix"])
+  useEffect(() => {
+    console.log("USE EFFECT WAS CALLED")
+  })
+
+
+  useEffect(() => {
+    
+    fetch("http://localhost:9000/api/v1/movies", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log("movies reponse", response);
+        return response.json();
+      })
+      .then((movieData) => {
+        console.log("movieData:", movieData);
+        setMoviesList(movieData.data)
+        // call to set state
+        // this.setState({ moviesList: movieData.data });
+      });
+  })
 
   return (
     <div>
       <h1>Movies</h1>
-      <List movies={[]}/>
-      <MovieForm submit={() => console.log("ash")}/>
+      <List movies={moviesList} />
+      <MovieForm submit={() => console.log("ash")} />
     </div>
   );
 };
-
 
 export { MovieContainer, FunctionalMovieContainer };
