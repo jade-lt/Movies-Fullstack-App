@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MovieForm from "./ MovieForm";
+import { MovieForm } from "./ MovieForm";
 import { List } from "./List";
 
 const FunctionalMovieContainer = () => {
