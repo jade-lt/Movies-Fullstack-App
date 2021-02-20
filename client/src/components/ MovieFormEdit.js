@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MovieForm = (props) => {
+const MovieFormEdit = (props) => {
   // const [title, setTitle] = useState("");
   // const [genre, setGenre] = useState("");
   // const [description, setDescription] = useState("");
@@ -12,11 +12,6 @@ const MovieForm = (props) => {
     title: '',
     description: ''
   })
-
-  // useEffect(() => {
-  //   console.log('MovieForm useEffect');
-  //   setFormState(props.movie)
-  // }, [props.movie])
 
   // 1st element - > state Variable
   // 2nd element - > function to change that state variable
@@ -34,33 +29,33 @@ const MovieForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("handleSubmit");
-    props.submit(formState.title, formState.genre, formState.description);
+    // props.submit(formState.title, formState.genre, formState.description);
   };
 
   return (
     <div>
-      <h2>Add Movie</h2>
+      <h2>Edit Movie</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Title
-          <input name="title" value={formState.title} onChange={handleChange}></input>
+          <input name="title" value={props.movie.title} onChange={handleChange}></input>
         </label>
         <label>
           Genre
-          <input name="genre" value={formState.genre} onChange={handleChange}></input>
+          <input name="genre" value={props.movie.genre} onChange={handleChange}></input>
         </label>
         <label>
           Description
           <input
             name="description"
-            value={formState.description}
+            value={props.movie.description}
             onChange={handleChange}
           ></input>
         </label>
-        <button type="submit">Add Movie</button>
+        <button type="submit">Edit Movie</button>
       </form>
     </div>
   );
 };
 
-export { MovieForm };
+export default MovieFormEdit;
