@@ -5,7 +5,7 @@ const List = (props) => {
       <ul>
         {props.movies.map((el, index) => (
           <li key={index}>
-            Title: {el.title} - Genre: {el.genre}
+            Title: {el.title} // Genre: {el.genre} // Description: {el.description}
           </li>
         ))}
       </ul>

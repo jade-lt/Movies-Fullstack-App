@@ -11,7 +11,8 @@ const MovieForm = (props) => {
   });
 
   const handleChange = (e) => {
-    const newState = { ...formState, [e.target.name]: e.target.value };
+    const newState = { ...formState };
+    newState[e.target.name] = e.target.value;
     console.log("newstate:", newState);
     console.log("formstate:", formState);
     setFormState(newState);
