@@ -65,6 +65,22 @@ const FunctionalMovieContainer = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [userName, setUserName] = useState("")
 
+  const handleMovieFormSubmit = (title, genre, description) => {
+    const newMovie = { genre: genre, title: title, description: description };
+    const newMovies = [...moviesList];
+    newMovies.push(newMovie);
+    setMoviesList(newMovies);
+    fetch("http://localhost:9000/api/v1/movies", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMovie),
+    }).then((response) => {
+      console.log("response:", response);
+    }); 
+  }
+    
   useEffect(() => {
     console.log("USE EFFECT WAS CALLED")
   })
@@ -88,13 +104,14 @@ const FunctionalMovieContainer = () => {
         // call to set state
         // this.setState({ moviesList: movieData.data });
       });
-  })
+      return null;
+  }, [moviesList]);
 
   return (
     <div>
       <h1>Movies</h1>
       <List movies={moviesList} />
-      <MovieForm submit={() => console.log("ash")} />
+      <MovieForm submit={handleMovieFormSubmit} />
     </div>
   );
 };
