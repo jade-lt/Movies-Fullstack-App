@@ -6,7 +6,6 @@ import {
 const App = () => {
   return (
     <div>
-      <MovieContainer />
       <FunctionalMovieContainer />
     </div>
   );
