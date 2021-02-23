@@ -26,6 +26,15 @@ const FunctionalMovieContainer = () => {
     const newMovies = [...moviesList];
     newMovies[foundMovie] = movie
     setMoviesList(newMovies);
+    fetch(`http://localhost:9000/api/v1/movies/${movie._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(movie)
+    }).then((response) => {
+      console.log("PUT response:", response);
+    })
   }
 
   const handleMovieFormSubmit = (title, genre, description) => {
